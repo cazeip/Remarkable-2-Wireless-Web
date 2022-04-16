@@ -22,15 +22,19 @@ filesystem["trash"] = {
     children: {}
 }
 
-fs.readdir('metadata', (err, files) => {
+fs.readdir('Remarkable', (err, files) => {
+    console.log("Found mounting point");
     for(i in files){
-        f = fs.readFileSync(`metadata/${files[i]}`, {encoding: 'utf-8'});
-        data = JSON.parse(f);
-        data.children = {};
+        console.log(files[i]);
+        if(files[i].contains(".metadata")){
+            f = fs.readFileSync(`Remarkable/${files[i]}`, {encoding: 'utf-8'});
+            data = JSON.parse(f);
+            data.children = {};
 
-        currentUUID = files[i].slice(0, files[i].length - ".metadata".length);
-        data.selfID = currentUUID;
-        filesystem[currentUUID] = data;
+            currentUUID = files[i].slice(0, files[i].length - ".metadata".length);
+            data.selfID = currentUUID;
+            filesystem[currentUUID] = data;
+        }
     }
     for(key in filesystem){
         if(key !== "" && key !== "trash") filesystem[filesystem[key].parent].children[key] = filesystem[key];
