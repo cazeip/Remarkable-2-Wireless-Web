@@ -70,9 +70,13 @@
                 }
                 else if(view.children[i].type === "DocumentType"){
                     e.innerText = "🗒 "+view.children[i].visibleName;
+                    e.setAttribute("onclick", `openFile('${i}')`)
                 }
                 document.getElementById("tree").appendChild(e);
             }
+        }
+        function openFile(uuid){
+            window.location.pathname = `/pdf/${uuid}`;
         }
         function navigate(uuid){
             position.push(uuid);
