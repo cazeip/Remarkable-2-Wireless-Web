@@ -1,6 +1,6 @@
 # Wireless web interface for Remarkable 2
 
-<img  src="images/icon.png" width="350">
+![Icon](images/icon.png)
 
 This project is a _very_ early prototype of a web interface made for the Remarkable 2 tablet.
 
@@ -14,7 +14,7 @@ Thankfully, your tablet is actually a _GNU + Linux_ computer, meaning you can co
 ## What this prototype does
 You can access some of your files from a web server hosted on your computer, and navigate your Remarkable 2 file system, to retrieve your data.
 
-<img src="images/example_screenshot.png">
+![Screenshot](images/example_screenshot.png)
 
 _Screenshot of the wireless web interface_
 
