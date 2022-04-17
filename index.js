@@ -55,7 +55,7 @@ app.get("/reload_cache", (req, res) => {
                                 result = filesystem[""];
                                 fs.writeFileSync("cached.json", JSON.stringify(result));
                                 console.log("Successfully indexed file system");
-                                res.status(200).send();
+                                res.status(200).send("Successfully indexed file system");
                             });
                         }
                     });
@@ -76,7 +76,7 @@ app.get("/pdf/:id", (req, res)=>{
         client.downloadFile(`/home/root/.local/share/remarkable/xochitl/${req.params.id}.pdf`, `cache/${req.params.id}.pdf`).then(response => {
             res.sendFile(path.join(__dirname,`cache/${req.params.id}.pdf`));
         }).catch(err => {
-            res.status(404).send("PDF file not found, we'll see for converting .rem files later");
+            res.status(404).send("PDF file not found, we'll see for converting .rm files later");
         });
     });
 });
