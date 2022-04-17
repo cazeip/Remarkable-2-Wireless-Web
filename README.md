@@ -1,10 +1,10 @@
-# Wireless web interface for Remarkable 2
+# Wireless web interface for reMarkable 2
 
 ![Icon](images/icon.png)
 
-This project is a _very_ early prototype of a web interface made for the Remarkable 2 tablet.
+This project is a _very_ early prototype of a web interface made for the reMarkable 2 tablet.
 
-As you may know, your Remarkable tablet can store your notes using its internal 6GB flash drive. However, when you want to retrieve your files, you can either:
+As you may know, your reMarkable tablet can store your notes using its internal 6GB flash drive. However, when you want to retrieve your files, you can either:
 
 * Use their cloud service, which can become very expensive, or even impossible, as you need their paid subscription to continue syncing your documents
 * Use their USB web interface, where you connect your tablet to your computer, and access a web service hosted on the tablet. By doing this, your computer doesn't see the tablet as a flash drive (like a normal USB stick would) but as a wired network interface (like an ethernet cable).
@@ -12,7 +12,7 @@ As you may know, your Remarkable tablet can store your notes using its internal 
 Thankfully, your tablet is actually a _GNU + Linux_ computer, meaning you can connect to it via SSH, and perform various actions using their terminal.
 
 ## What this prototype does
-You can access some of your files from a web server hosted on your computer, and navigate your Remarkable 2 file system, to retrieve your data.
+You can access some of your files from a web server hosted on your computer, and navigate your reMarkable 2 file system, to retrieve your data.
 
 ![Screenshot](images/example_screenshot.png)
 
@@ -40,8 +40,8 @@ In the meantime, if you try to download a notebook, it will tell you that Notebo
 You will need _node.js_ and their _npm_ package manager.
 1. Clone and install the required dependencies by typing this in your terminal:
 ```
-git clone https://github.com/cazeip/Remarkable-2-Wireless-Web.git
-cd Remarkable-2-Wireless-Web/
+git clone https://github.com/cazeip/reMarkable-2-Wireless-Web.git
+cd reMarkable-2-Wireless-Web/
 npm install
 ```
 2. Create a directory at `cache/`
