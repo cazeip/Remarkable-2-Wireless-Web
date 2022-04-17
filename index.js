@@ -28,7 +28,6 @@ app.get("/reload_cache", (req, res) => {
         password: process.env.PASSWORD 
     }).then(client => {
         client.list("/home/root/.local/share/remarkable/xochitl/").then(list => {
-            console.log(list);
             let toBedownloaded = 0;
             for(i in list){
                 if(list[i].name.includes(".metadata")){
@@ -78,7 +77,6 @@ app.get("/pdf/:id", (req, res)=>{
             for(let i in list){
                 if (list[i].name.includes(pdfUUID)){
                     curatedList.push(list[i]);
-                    console.log(list[i]);
                 }
             }
             let toBedownloaded = 0;
@@ -104,7 +102,6 @@ app.get("/pdf/:id", (req, res)=>{
             res.sendFile(path.join(__dirname,`cache/${req.params.id}.pdf`));
         }).catch(err => {
             res.status(404).send("PDF file not found, we'll see for converting .rm files later");
-            console.log("")
         });
         */
     });
