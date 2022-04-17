@@ -66,18 +66,47 @@ app.get("/reload_cache", (req, res) => {
     });
 });
 app.get("/pdf/:id", (req, res)=>{
-    console.log(req.params.id);
+    const pdfUUID = req.params.id;
     node_scp.Client({
         host: process.env.HOST,
         port: 22,
         username: 'root',
         password: process.env.PASSWORD 
     }).then(client => {
+        client.list(`/home/root/.local/share/remarkable/xochitl`).then(list => {
+            let curatedList = [];
+            for(let i in list){
+                if (list[i].name.includes(pdfUUID)){
+                    curatedList.push(list[i]);
+                    console.log(list[i]);
+                }
+            }
+            let toBedownloaded = 0;
+            for(let i in curatedList){
+                let request;
+                if(curatedList[i].type === "d"){
+                    request = client.downloadDir(`/home/root/.local/share/remarkable/xochitl/${curatedList[i].name}`, `cache/${curatedList[i].name}`)
+                }else{
+                    request = client.downloadFile(`/home/root/.local/share/remarkable/xochitl/${curatedList[i].name}`, `cache/${curatedList[i].name}`)
+                }    
+                request.then(resp => {
+                    toBedownloaded--;
+                    if(toBedownloaded === 0){
+                        console.log(`Downloaded all files.`);
+                        res.sendStatus(200);
+                    }
+                });
+                toBedownloaded++;
+            }
+        });
+        /*
         client.downloadFile(`/home/root/.local/share/remarkable/xochitl/${req.params.id}.pdf`, `cache/${req.params.id}.pdf`).then(response => {
             res.sendFile(path.join(__dirname,`cache/${req.params.id}.pdf`));
         }).catch(err => {
             res.status(404).send("PDF file not found, we'll see for converting .rm files later");
+            console.log("")
         });
+        */
     });
 });
 let filesystem = {};
