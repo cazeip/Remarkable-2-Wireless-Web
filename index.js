@@ -6,6 +6,7 @@ const path = require("path");
 const { dirname } = require("path");
 const node_scp = require("node-scp");
 const child_process = require("child_process");
+require("dotenv").config();
 let result;
 
 app.disable('x-powered-by');
@@ -21,10 +22,10 @@ app.get("/data", (req, res) => {
 app.get("/reload_cache", (req, res) => {
     child_process.exec("rm cache/*");
     node_scp.Client({
-        host: '192.168.1.42',
+        host: process.env.HOST,
         port: 22,
         username: 'root',
-        password: '2qAgxR8acm'
+        password: process.env.PASSWORD 
     }).then(client => {
         client.list("/home/root/.local/share/remarkable/xochitl/").then(list => {
             console.log(list);
@@ -67,10 +68,10 @@ app.get("/reload_cache", (req, res) => {
 app.get("/pdf/:id", (req, res)=>{
     console.log(req.params.id);
     node_scp.Client({
-        host: '192.168.1.42',
+        host: process.env.HOST,
         port: 22,
         username: 'root',
-        password: '2qAgxR8acm'
+        password: process.env.PASSWORD 
     }).then(client => {
         client.downloadFile(`/home/root/.local/share/remarkable/xochitl/${req.params.id}.pdf`, `cache/${req.params.id}.pdf`).then(response => {
             res.sendFile(path.join(__dirname,`cache/${req.params.id}.pdf`));
