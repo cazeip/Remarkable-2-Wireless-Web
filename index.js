@@ -8,6 +8,7 @@ const node_scp = require("node-scp");
 const child_process = require("child_process");
 let result;
 
+app.disable('x-powered-by');
 app.use(express.static('./public'));
 app.use(express.json());
 
@@ -36,7 +37,6 @@ app.get("/reload_cache", (req, res) => {
                             console.log("Cached Everything");
                             client.close();
                             fs.readdir('cache', (err, files) => {
-                                console.log("Found mounting point");
                                 for(i in files){
                                     if(files[i].includes(".metadata")){
                                         f = fs.readFileSync(`cache/${files[i]}`, {encoding: 'utf-8'});
@@ -74,6 +74,8 @@ app.get("/pdf/:id", (req, res)=>{
     }).then(client => {
         client.downloadFile(`/home/root/.local/share/remarkable/xochitl/${req.params.id}.pdf`, `cache/${req.params.id}.pdf`).then(response => {
             res.sendFile(path.join(__dirname,`cache/${req.params.id}.pdf`));
+        }).catch(err => {
+            res.status(404).send("PDF file not found, we'll see for converting .rem files later");
         });
     });
 });
