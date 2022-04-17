@@ -1,5 +1,7 @@
 # Wireless web interface for Remarkable 2
 
+<img  src="images/icon.png" width="350">
+
 This project is a _very_ early prototype of a web interface made for the Remarkable 2 tablet.
 
 As you may know, your Remarkable tablet can store your notes using its internal 6GB flash drive. However, when you want to retrieve your files, you can either:
