@@ -40,8 +40,8 @@ In the meantime, if you try to download a notebook, it will tell you that Notebo
 You will need _node.js_ and their _npm_ package manager.
 1. Clone and install the required dependencies by typing this in your terminal:
 ```
-git clone https://github.com/cazeip/reMarkable-2-Wireless-Web.git
-cd reMarkable-2-Wireless-Web/
+git clone https://github.com/cazeip/Remarkable-2-Wireless-Web.git
+cd Remarkable-2-Wireless-Web/
 npm install
 ```
 2. Create a directory at `cache/`
