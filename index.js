@@ -29,6 +29,10 @@ app.use(express.static('./public'));
 app.use(express.json());
 
 
+const { HOST, PASSWORD } = process.env;
+if (HOST === undefined || PASSWORD === undefined) {
+    throw 'Missing tablet IP and passwird in .env file'
+}
 
 app.listen(port, () => {
     console.log(`Success! Your application is running on port ${port}.`);
@@ -59,7 +63,7 @@ app.get('/reload_cache', (req, res) => {
                                         let f = fs.readFileSync(`cache/${files[i]}`, { encoding: 'utf-8' });
                                         let data = JSON.parse(f);
                                         data.children = {};
-                                        
+
                                         let currentUUID = files[i].slice(0, files[i].length - '.metadata'.length);
                                         data.selfID = currentUUID;
                                         filesystem[currentUUID] = data;
@@ -80,7 +84,7 @@ app.get('/reload_cache', (req, res) => {
             }
         });
     }).catch(err => {
-        res.status(errorMessages.failedResponse.code).send(errorMessages.failedResponse.message);
+        res.status(errorMessages.failedResponse.code).send(err.message + ' ' + errorMessages.failedResponse.message);
     });
 });
 app.get('/unconverted/:id', (req, res) => {
@@ -101,7 +105,7 @@ app.get('/unconverted/:id', (req, res) => {
             res.status(errorMessages.noMatchingPDF.code).send(errorMessages.noMatchingPDF.message);
         });
     }).catch(err => {
-        res.status(errorMessages.failedResponse.code).send(errorMessages.failedResponse.message);
+        res.status(errorMessages.failedResponse.code).send(err.message + ' ' + errorMessages.failedResponse.message);
     });
 });
 app.get('/pdf/:id', (req, res) => {
@@ -155,11 +159,8 @@ app.get('/pdf/:id', (req, res) => {
             }
         });
     }).catch(err => {
-        res.status(errorMessages.failedResponse.code).send(errorMessages.failedResponse.message);
+        res.status(errorMessages.failedResponse.code).send(err.message + ' ' + errorMessages.failedResponse.message);
     });
-});
-app.get('/fetch_error', (req, res) => {
-    res.status(errorMessages.failedResponse.code).send(errorMessages.failedResponse.message);
 });
 let filesystem = {};
 filesystem[''] = {

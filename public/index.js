@@ -70,7 +70,9 @@ function reloadCache(button) {
         if (_.ok) {
             window.location.reload();
         } else {
-            window.location.pathname = '/fetch_error';
+            return _.text();
         }
+    }).then(a => {
+        document.body.innerHTML = a;
     });
 }
