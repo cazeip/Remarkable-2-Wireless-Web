@@ -17,6 +17,11 @@ body{
 .spin{
     animation: rotate 500ms infinite;
 }
+#statusBar{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
 #statusBar > a{
     cursor: pointer;
