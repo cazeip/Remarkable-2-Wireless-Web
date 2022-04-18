@@ -47,41 +47,6 @@ svg{
 .listItem:hover{
     background-color: #ccc;
 }
-button{
-    border: none;
-    padding: 10px;
-    background: lightgray;
-    position: relative;
-    padding-left: 20px;
-}
-button::before, button::after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    right: -15px;
-    width: 25px;
-    height: 15px;
-    background: lightgray;
-}
-button::before {
-    top: 7px;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-button::after {
-    bottom: 7px;
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-}
-
-button:nth-child(odd), button:nth-child(odd)::before, button:nth-child(odd)::after{
-    background-color: white;
-}
-button:hover::before, button:hover::after, button:hover{
-    background-color: gray;
-}
 @media (prefers-color-scheme:dark){
     body{
         background-color: black;
@@ -94,18 +59,6 @@ button:hover::before, button:hover::after, button:hover{
         background-color: black;
     }
     .listItem:hover{
-        background-color: #999;
-    }
-    button{
-        color: white;
-    }
-    button, button::before, button::after{
-        background-color: #333;
-    }
-    button:nth-child(odd), button:nth-child(odd)::before, button:nth-child(odd)::after{
-        background-color: black;
-    }
-    button:hover, button:hover:before, button:hover::after{
         background-color: #999;
     }
     svg{
