@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 
 let position = [];
 let data = [];
@@ -17,7 +16,7 @@ function refreshView(){
     a.setAttribute('onclick', 'jump([])');
     a.innerText = 'root > ';
     document.getElementById('statusBar').appendChild(a);
-    for(i in position){
+    for(let i in position){
         view = view.children[position[i]];
         virtualPosition.push(position[i]);
         let a = document.createElement('a');
@@ -26,7 +25,7 @@ function refreshView(){
         document.getElementById('statusBar').appendChild(a);
     }
     document.getElementById('tree').innerHTML = '';
-    for(i in view.children){
+    for(let i in view.children){
         let e = document.createElement('div');
         e.classList.add('listItem');
         if(view.children[i].type === 'CollectionType'){
