@@ -30,11 +30,22 @@ In order to not overload the tablet with requests, caching is done only when acc
 The frontend requests the JSON file, and displays the file system that you can easily navigate. It distinguishes between folders and files, and you can even click on files to view them.
 
 When you do so, the server downloads the file in question, stores it in the `cache/` and serves the file to the user
+## Lines format conversion
+The main limitation, is that not all the files are in a PDF format: reMarkable stores your notebooks and annotated PDFs in a proprietary format named "lines format", and whose extension is `.rm` and needs conversion to PDF
 
-## Limitations
-Sadly, the main limitation, is that you cannot view all the files: reMarkable stores your notebooks and annotated PDFs in a proprietary format named "lines format", and whose extension is `.rm` and needs conversion to PDF before you do anything. When you use their USB Web interface, and you download a notebook or annotated PDF, it actually takes some time to generate the PDF file, which is then served to the user.
+When you use their USB Web interface, and you download a notebook or annotated PDF, it actually takes some time to generate the PDF file, which is then served to the user.
 
-In the meantime, if you try to download a notebook, it will tell you that Notebooks aren't supported, and if you download an annotated PDF, you'll get the original PDF without annotations.
+### Tool used
+Thankfully, there are plenty of converters available on GitHub, and this project uses rorycl's [rm2pdf](https://github.com/rorycl/rm2pdfrm2pdf).
+
+So, when you want to download a pdf or an annotated document, the server copies over SCP all the files related to that document. Then, it converts it using rm2pdf, and streams it to the browser.
+
+### Limitation
+rorycl's rm2pdf isn't perfect, however, meaning your downloaded files will look significantly different from what you could get using reMarkable's default set of solutions.
+
+Missing features include, but are not limited to:
+* No color support
+* Blank background for notebooks (goodbye, grids, lines), this may be fixable
 
 ## Installation 
 You will need _node.js_ and their _npm_ package manager.
@@ -44,9 +55,9 @@ git clone https://github.com/cazeip/Remarkable-2-Wireless-Web.git
 cd Remarkable-2-Wireless-Web/
 npm install
 ```
-2. Create a directory at `cache/`
+2. Create a directory at `cache/`, and at `rendered`
 ```
-mkdir cache
+mkdir cache rendered
 ```
 3. On your tablet, go to Settings > Help > Copyrights and licences
     *  Here you'll find "copyright notices and software licenses"
@@ -58,14 +69,16 @@ mkdir cache
 HOST="192.168.x.x"
 PASSWORD="password"
 ```
+5. Download the appropriate version of [rm2pdf](https://github.com/rorycl/rm2pdf/releases) for Linux or macOS.
+    1. You should get a binary executable file, that you will put inside the repository
+    1. Rename it so it's called `rm2pdf`
+    1. Give it execution permissions with `chmod 744 rm2pdf`, its permissions should be `-rwxr--r--`
 5. Start the web server
 ```
 node index.js
 ```
 6. Open a browser, and go to [localhost:4000](http://localhost:4000), the web page should load, but display an empty file system. That's because you haven't cached anything yet.
 
-7. Load [localhost:4000/reload_cache](http://localhost:4000/reload_cache) to tell the server to reload the cache, by downloading all metadata files through SCP.
+7. Click on the round "refresh" arrow, which will download all metadata files through SCP.
     * This operation can take a while, depending on the amount of files you have, and the latency of your Wi-Fi connection
-    * You should see many files appearing in the `cache/` folder. Once everything is indexed, the page should display a confirm message
-
-8. Go back to [localhost:4000](http://localhost:4000), your files should all show up.
+    * You should see many files appearing in the `cache/` folder. Once everything is indexed, the page should reload, and your files should all show up.
