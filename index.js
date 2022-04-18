@@ -74,9 +74,13 @@ app.get("/pdf/:id", (req, res)=>{
     }).then(client => {
         client.list(`/home/root/.local/share/remarkable/xochitl`).then(list => {
             let curatedList = [];
+            let containsPdf = false;
             for(let i in list){
                 if (list[i].name.includes(pdfUUID)){
                     curatedList.push(list[i]);
+                    if(list[i].name.includes(".pdf")){
+                        containsPdf = true;
+                    }
                 }
             }
             let toBedownloaded = 0;
@@ -91,7 +95,18 @@ app.get("/pdf/:id", (req, res)=>{
                     toBedownloaded--;
                     if(toBedownloaded === 0){
                         console.log(`Downloaded all files.`);
-                        res.sendStatus(200);
+                        let conversion;
+                        if(containsPdf){
+                            conversion = child_process.exec(`./rm2pdf cache/${pdfUUID} rendered/${pdfUUID}.pdf`);
+                        }else{
+                            conversion = child_process.exec(`./rm2pdf -t templates/A4.pdf cache/${pdfUUID} rendered/${pdfUUID}.pdf`);
+                        }
+                        conversion.on("exit", () => {
+                            let f = fs.readFileSync(`cache/${pdfUUID}.metadata`, {encoding: "utf-8"});
+                            let dataForname = JSON.parse(f);
+                            let pdfName = dataForname.visibleName;
+                            res.download(path.join(__dirname, `rendered/${pdfUUID}.pdf`), `${pdfName}.pdf`);
+                        });
                     }
                 });
                 toBedownloaded++;
