@@ -1,43 +1,44 @@
+/* eslint-disable no-undef */
 
 let position = [];
 let data = [];
 let view = {};
-fetch("data").then(res => res.json()).then(res => {
+fetch('data').then(res => res.json()).then(res => {
     console.log(res);
     data = res;
     refreshView();
 });
 function refreshView(){
     view = data;
-    document.getElementById("statusBar").innerHTML = "";
+    document.getElementById('statusBar').innerHTML = '';
     let virtualPosition = [];
     
-    let a = document.createElement("a");
-    a.setAttribute("onclick", `jump([])`);
-    a.innerText = "root > ";
-    document.getElementById("statusBar").appendChild(a);
+    let a = document.createElement('a');
+    a.setAttribute('onclick', 'jump([])');
+    a.innerText = 'root > ';
+    document.getElementById('statusBar').appendChild(a);
     for(i in position){
         view = view.children[position[i]];
         virtualPosition.push(position[i]);
-        let a = document.createElement("a");
-        a.setAttribute("onclick", `jump(${JSON.stringify(virtualPosition)})`);
-        a.innerText = view.visibleName + " > ";
-        document.getElementById("statusBar").appendChild(a);
+        let a = document.createElement('a');
+        a.setAttribute('onclick', `jump(${JSON.stringify(virtualPosition)})`);
+        a.innerText = view.visibleName + ' > ';
+        document.getElementById('statusBar').appendChild(a);
     }
-    document.getElementById("tree").innerHTML = "";
+    document.getElementById('tree').innerHTML = '';
     for(i in view.children){
-        let e = document.createElement("div");
-        e.classList.add("listItem");
-        if(view.children[i].type === "CollectionType"){
-            e.setAttribute("onclick", `navigate('${i}')`)
-            e.innerText = "📂 "+view.children[i].visibleName;
-            e.classList.add("folder");
+        let e = document.createElement('div');
+        e.classList.add('listItem');
+        if(view.children[i].type === 'CollectionType'){
+            e.setAttribute('onclick', `navigate('${i}')`)
+            e.innerText = '📂 '+view.children[i].visibleName;
+            e.classList.add('folder');
         }
-        else if(view.children[i].type === "DocumentType"){
-            e.innerText = "🗒 "+view.children[i].visibleName;
-            e.setAttribute("onclick", `openFile('${i}')`)
+        else if(view.children[i].type === 'DocumentType'){
+            e.innerText = '🗒 '+view.children[i].visibleName;
+            e.setAttribute('onclick', `openFile('${i}')`)
         }
-        document.getElementById("tree").appendChild(e);
+        document.getElementById('tree').appendChild(e);
     }
 }
 function openFile(uuid){
@@ -51,7 +52,7 @@ function jump(uuidList){
     position = uuidList;
     refreshView();
 }
-function reload_cache(button){
-    button.classList.add("spin");
-    fetch("/reload_cache").then(_ => {window.location.reload();});
+function reloadCache(button){
+    button.classList.add('spin');
+    fetch('/reload_cache').then(_ => {window.location.reload();});
 }

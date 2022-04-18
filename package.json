@@ -14,5 +14,8 @@
     "env": "^0.0.2",
     "express": "^4.17.3",
     "node-scp": "^0.0.17"
+  },
+  "devDependencies": {
+    "eslint": "^8.13.0"
   }
 }
