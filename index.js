@@ -31,7 +31,7 @@ app.use(express.json());
 
 const { HOST, PASSWORD } = process.env;
 if (HOST === undefined || PASSWORD === undefined) {
-    throw 'Missing tablet IP and passwird in .env file'
+    throw 'Missing tablet IP and password in .env file'
 }
 
 app.listen(port, () => {
