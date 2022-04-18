@@ -12,16 +12,16 @@ function refreshView(){
     document.getElementById("statusBar").innerHTML = "";
     let virtualPosition = [];
     
-    let a = document.createElement("button");
+    let a = document.createElement("a");
     a.setAttribute("onclick", `jump([])`);
-    a.innerText = "root";
+    a.innerText = "root > ";
     document.getElementById("statusBar").appendChild(a);
     for(i in position){
         view = view.children[position[i]];
         virtualPosition.push(position[i]);
-        let a = document.createElement("button");
+        let a = document.createElement("a");
         a.setAttribute("onclick", `jump(${JSON.stringify(virtualPosition)})`);
-        a.innerText = view.visibleName;
+        a.innerText = view.visibleName + " > ";
         document.getElementById("statusBar").appendChild(a);
     }
     document.getElementById("tree").innerHTML = "";
@@ -50,4 +50,8 @@ function navigate(uuid){
 function jump(uuidList){
     position = uuidList;
     refreshView();
+}
+function reload_cache(button){
+    button.classList.add("spin");
+    fetch("/reload_cache").then(_ => {window.location.reload();});
 }
