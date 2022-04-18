@@ -73,12 +73,12 @@ PASSWORD="password"
     1. You should get a binary executable file, that you will put inside the repository
     1. Rename it so it's called `rm2pdf`
     1. Give it execution permissions with `chmod 744 rm2pdf`, its permissions should be `-rwxr--r--`
-5. Start the web server
+6. Start the web server
 ```
 node index.js
 ```
-6. Open a browser, and go to [localhost:4000](http://localhost:4000), the web page should load, but display an empty file system. That's because you haven't cached anything yet.
+7. Open a browser, and go to [localhost:4000](http://localhost:4000), the web page should load, but display an empty file system. That's because you haven't cached anything yet.
 
-7. Click on the round "refresh" arrow, which will download all metadata files through SCP.
+8. Click on the round "refresh" arrow, which will download all metadata files through SCP.
     * This operation can take a while, depending on the amount of files you have, and the latency of your Wi-Fi connection
     * You should see many files appearing in the `cache/` folder. Once everything is indexed, the page should reload, and your files should all show up.
