@@ -46,6 +46,7 @@ rorycl's rm2pdf isn't perfect, however, meaning your downloaded files will look 
 Missing features include, but are not limited to:
 * No color support
 * Blank background for notebooks (goodbye, grids, lines), this may be fixable
+* Some files not even wanting to convert, maybe because of PDF page sizes?
 
 ## Installation 
 You will need _node.js_ and their _npm_ package manager.
@@ -82,3 +83,6 @@ node index.js
 8. Click on the round "refresh" arrow, which will download all metadata files through SCP.
     * This operation can take a while, depending on the amount of files you have, and the latency of your Wi-Fi connection
     * You should see many files appearing in the `cache/` folder. Once everything is indexed, the page should reload, and your files should all show up.
+
+## License
+This repository and its code is provided under the [MIT license](LICENSE).

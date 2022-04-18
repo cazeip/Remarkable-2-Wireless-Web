@@ -1,8 +1,7 @@
 node_modules
 **/.DS_Store
-metadata
-Remarkable
 cache
 .env
 rendered
 rm2pdf
+.vscode
