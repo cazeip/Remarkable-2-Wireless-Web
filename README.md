@@ -36,7 +36,7 @@ The main limitation, is that not all the files are in a PDF format: reMarkable s
 When you use their USB Web interface, and you download a notebook or annotated PDF, it actually takes some time to generate the PDF file, which is then served to the user.
 
 ### Tool used
-Thankfully, there are plenty of converters available on GitHub, and this project uses rorycl's [rm2pdf](https://github.com/rorycl/rm2pdfrm2pdf).
+Thankfully, there are plenty of converters available on GitHub, and this project uses rorycl's [rm2pdf](https://github.com/rorycl/rm2pdf).
 
 So, when you want to download a pdf or an annotated document, the server copies over SCP all the files related to that document. Then, it converts it using rm2pdf, and streams it to the browser.
 
