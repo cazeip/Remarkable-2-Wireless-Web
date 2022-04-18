@@ -112,13 +112,6 @@ app.get("/pdf/:id", (req, res)=>{
                 toBedownloaded++;
             }
         });
-        /*
-        client.downloadFile(`/home/root/.local/share/remarkable/xochitl/${req.params.id}.pdf`, `cache/${req.params.id}.pdf`).then(response => {
-            res.sendFile(path.join(__dirname,`cache/${req.params.id}.pdf`));
-        }).catch(err => {
-            res.status(404).send("PDF file not found, we'll see for converting .rm files later");
-        });
-        */
     });
 });
 let filesystem = {};
