@@ -1,3 +1,6 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/Cazeip/Remarkable-2-Wireless-Web)
+![GitHub](https://img.shields.io/github/license/Cazeip/Remarkable-2-Wireless-Web)
+![GitHub last commit](https://img.shields.io/github/last-commit/Cazeip/Remarkable-2-Wireless-Web)
 # Wireless web interface for reMarkable 2
 
 ![Icon](images/icon.png)
